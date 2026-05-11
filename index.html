@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>guilherme Natorf | Outplacement</title>
+  <meta name="description"
+    content="Conectando empresas a talentos. Outplacement com Guilherme Natorf — especialista em Operações, Pessoas e Cultura.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Caveat:wght@500;700&family=Inter:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #080808;
+      --red: #cc0000;
+      --white: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(8, 8, 8, 0.92);
+      backdrop-filter: blur(14px);
+      border-color: var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .nav-brand .small {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+    }
+
+    .nav-brand .big {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      background: var(--red) !important;
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 700 !important;
+    }
+
+    .nav-cta:hover {
+      background: #aa0000 !important;
+    }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 88% 12%, rgba(140, 0, 0, 0.72) 0%, transparent 48%),
+        radial-gradient(ellipse at 12% 88%, rgba(80, 0, 0, 0.38) 0%, transparent 44%),
+        var(--black);
+    }
+
+    .hero-content {
+      text-align: center;
+      z-index: 1;
+      padding: 2rem;
+    }
+
+    .hero-small {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(0.65rem, 1.4vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: -0.1em;
+      opacity: 0;
+      animation: fadeDown 0.8s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(4.5rem, 15vw, 11rem);
+      font-weight: 900;
+      line-height: 0.9;
+      display: block;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeDown 0.8s 0.4s forwards;
+    }
+
+    .hero-script {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2.2rem, 6.5vw, 5rem);
+      font-weight: 700;
+      color: var(--red);
+      display: block;
+      margin-top: 0.05em;
+      opacity: 0;
+      animation: fadeDown 0.8s 0.6s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeDown 0.8s 1.2s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(204, 0, 0, 0.8), transparent);
+      animation: lineGrow 1.5s 1.5s ease-in-out infinite;
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes lineGrow {
+
+      0%,
+      100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scaleY(1.4);
+        opacity: 0.5;
+      }
+    }
+
+    /* ════════════════════════════════════════
+       ABOUT
+    ════════════════════════════════════════ */
+    .about {
+      padding: 7rem 2rem;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 90% 10%, rgba(120, 0, 0, 0.45) 0%, transparent 50%),
+        var(--black);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-photo-ring {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 2px solid rgba(204, 0, 0, 0.4);
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+
+    .about-photo-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: grayscale(100%);
+    }
+
+    .about-name {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text {
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .about-text p+p {
+      margin-top: 1.1rem;
+    }
+
+    .about-text strong {
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .brand-side {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .brand-side-text {
+      writing-mode: vertical-rl;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .brand-side-text b {
+      font-weight: 900;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .brand-side-bar {
+      width: 1.5px;
+      height: 48px;
+      background: var(--red);
+      opacity: 0.7;
+    }
+
+    .year-mark {
+      writing-mode: vertical-rl;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.08em;
+    }
+
+    /* ════════════════════════════════════════
+       TAGLINE
+    ════════════════════════════════════════ */
+    .tagline {
+      padding: 6rem 2rem;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(120, 0, 0, 0.55) 0%, transparent 55%),
+        var(--black);
+    }
+
+    .tagline-top {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .tagline-bottom {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    /* ════════════════════════════════════════
+       HOW IT WORKS
+    ════════════════════════════════════════ */
+    .how {
+      padding: 6rem 2rem;
+      background:
+        radial-gradient(ellipse at 75% 50%, rgba(100, 0, 0, 0.38) 0%, transparent 52%),
+        var(--black);
+    }
+
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.96);
+      color: #111;
+      border-radius: 1.4rem;
+      padding: 2rem 1.4rem 1.8rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .step-num {
+      width: 58px;
+      height: 58px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: white;
+      margin: 0 auto 1.2rem;
+    }
+
+    .step-label {
+      font-family: 'Caveat', cursive;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 0.7rem;
+    }
+
+    .step-desc {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.55;
+      color: #222;
+    }
+
+    .step-method {
+      margin-top: 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 900;
+      color: var(--red);
+    }
+
+    /* ════════════════════════════════════════
+       METHOD SECTIONS
+    ════════════════════════════════════════ */
+    .method {
+      padding: 6rem 2rem;
+    }
+
+    .method.bg-left {
+      background:
+        radial-gradient(ellipse at 15% 50%, rgba(100, 0, 0, 0.38) 0%, transparent 52%),
+        var(--black);
+    }
+
+    .method.bg-right {
+      background:
+        radial-gradient(ellipse at 85% 50%, rgba(100, 0, 0, 0.38) 0%, transparent 52%),
+        var(--black);
+    }
+
+    .method-logo {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      line-height: 1;
+    }
+
+    .lbl-talent {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--red);
+    }
+
+    .lbl-scan {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .lbl-linkedin {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      color: var(--red);
+      letter-spacing: -0.02em;
+    }
+
+    .lbl-building {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .method-box {
+      max-width: 880px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 1.1rem;
+      padding: 2.5rem 3rem;
+      background: var(--card-bg);
+    }
+
+    .method-text {
+      font-style: italic;
+      font-size: 1.02rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .method-text p+p {
+      margin-top: 1.2rem;
+    }
+
+    .method-text strong {
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    /* ════════════════════════════════════════
+       PRICING
+    ════════════════════════════════════════ */
+    .pricing {
+      padding: 6rem 2rem;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(90, 0, 0, 0.5) 0%, transparent 55%),
+        var(--black);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      max-width: 920px;
+      margin: 2.5rem auto 0;
+    }
+
+    .price-card {
+      border: 1.5px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2rem 1.6rem;
+      text-align: center;
+      background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .price-card:hover {
+      border-color: rgba(204, 0, 0, 0.4);
+      transform: translateY(-5px);
+    }
+
+    .price-card-label {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .price-badge {
+      background: var(--red);
+      color: white;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      padding: 0.38rem 0;
+      border-radius: 0.3rem;
+      width: 100%;
+      text-transform: uppercase;
+    }
+
+    .price-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      text-align: left;
+      width: 100%;
+    }
+
+    .price-check {
+      color: var(--red);
+      font-size: 1.15rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .price-item strong {
+      display: block;
+      font-weight: 700;
+    }
+
+    .price-item span {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.85rem;
+    }
+
+    /* ════════════════════════════════════════
+       CLOSING
+    ════════════════════════════════════════ */
+    .closing {
+      padding: 7rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 55%, rgba(170, 0, 0, 0.45) 0%, transparent 62%),
+        var(--black);
+    }
+
+    .closing-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .closing-bg-text {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(6rem, 20vw, 17rem);
+      font-weight: 900;
+      color: rgba(0, 0, 0, 0.55);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .closing-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .closing-script {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+    }
+
+    .closing-brand {
+      margin-top: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .closing-brand .small {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+    }
+
+    .closing-brand .big {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+    }
+
+    /* ════════════════════════════════════════
+       WHATSAPP FLOATING
+    ════════════════════════════════════════ */
+    .wa-btn {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      padding: 0.85rem 1.4rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 4px 24px rgba(37, 211, 102, 0.35);
+      z-index: 200;
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+
+    .wa-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.45);
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about-photo-ring {
+        margin: 0 auto;
+      }
+
+      .brand-side {
+        display: none;
+      }
+
+      .method-box {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .wa-btn .wa-label {
+        display: none;
+      }
+
+      .wa-btn {
+        border-radius: 50%;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-brand">
+      <span class="small">guilherme</span>
+      <span class="big">Natorf</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#metodologias">Metodologias</a></li>
+      <li><a href="#investimento">Investimento</a></li>
+      <li><a href="https://wa.me/5551991900679?text=Ol%C3%A1%2C+gostaria+de+saber+mais+sobre+o+outplacement!"
+          target="_blank" rel="noopener" class="nav-cta">Fale comigo</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <span class="hero-small" style="font-size:3rem">guilherme</span>
+      <span class="hero-name">Natorf</span>
+      <span class="hero-script">outplacement</span>
+    </div>
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="sobre">
+    <div class="container">
+      <div class="about-grid reveal">
+        <div>
+          <div class="about-photo-ring">
+            <img src="guilherme.jpg" alt="Guilherme Natorf">
+          </div>
+        </div>
+        <div>
+          <h2 class="about-name">Guilherme Natorf</h2>
+          <div class="about-text">
+            <p>Curioso, autodidata, inquieto, geek e com espírito empreendedor. Formado em Administração pela
+              Universidade Federal do Rio Grande do Sul e especializado em <strong>Operações, Pessoas e
+                Cultura,</strong> possui quase 20 anos de experiência no mercado de Marketing Digital e Comunicação. Tem
+              ampla expertise na gestão e estruturação de operações, tendo liderado a operação da W3haus (agência de
+              comunicação) onde assumiu diferentes posições de liderança até se tornar CEO da agência.</p>
+            <p>Foi um dos idealizadores do Haus, um ecossistema de empresas de comunicação e tecnologia, além de
+              cofundar a Huia (produtora tech) e a Brooke (produtora de live action).</p>
+            <p>Especialidades: gestão empresarial, governança, gestão de operações, liderança, gestão de pessoas e
+              <strong>recrutamento.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="brand-side">
+      <div class="brand-side-text">guilherme <b>Natorf</b></div>
+      <div class="brand-side-bar"></div>
+      <div class="year-mark">2025</div>
+    </div>
+  </section>
+
+  <!-- TAGLINE -->
+  <section class="tagline">
+    <div class="reveal">
+      <div class="tagline-top">Conectando empresas a</div>
+      <div class="tagline-bottom">talentos</div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="como-funciona">
+    <div class="container">
+      <h2 class="section-title reveal">Como funciona?</h2>
+      <div class="steps-grid">
+        <div class="step-card reveal" style="transition-delay:0.05s">
+          <div class="step-num">1</div>
+          <div class="step-label">Inside</div>
+          <p class="step-desc">Processo de autoconhecimento onde fazemos um olhar das fortalezas e pontos a desenvolver
+            do talento usando o método</p>
+          <div class="step-method">talentScan</div>
+        </div>
+        <div class="step-card reveal" style="transition-delay:0.15s">
+          <div class="step-num">2</div>
+          <div class="step-label">Outside</div>
+          <p class="step-desc">A partir dos interesses e forças, fazemos uma reconfiguração do posicionamento e
+            visibilidade do perfil usando o método</p>
+          <div class="step-method">linkedin building</div>
+        </div>
+        <div class="step-card reveal" style="transition-delay:0.25s">
+          <div class="step-num">3</div>
+          <div class="step-label">Market</div>
+          <p class="step-desc">Processo de recomendação do talento para oportunidades aderentes ao seu perfil/interesse
+          </p>
+        </div>
+        <div class="step-card reveal" style="transition-delay:0.35s">
+          <div class="step-num">4</div>
+          <div class="step-label">Pronto!</div>
+          <p class="step-desc">O match acontece e o contrato é assinado</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TALENT SCAN -->
+  <section class="method bg-left" id="metodologias">
+    <div class="container">
+      <div class="method-logo reveal">
+        <span class="lbl-talent">talent</span><span class="lbl-scan">Scan</span>
+      </div>
+      <div class="method-box reveal">
+        <div class="method-text">
+          <p>O <strong>Talent Scan</strong> é uma metodologia de análise de perfil profissional que busca identificar
+            características, habilidades, competências, preferências, valores e pontos fortes de um indivíduo no
+            ambiente de trabalho. Por meio dessa análise, é possível compreender como o profissional se comporta, toma
+            decisões, reage a diferentes situações e quais são suas potencialidades. O objetivo principal é alinhar
+            essas informações tanto aos objetivos da organização quanto às aspirações do próprio indivíduo.</p>
+          <p>Essa ferramenta é fundamental em processos de recrutamento, desenvolvimento de carreira, gestão de talentos
+            e planejamento estratégico. Sua aplicação é especialmente relevante em empresas que valorizam a
+            individualidade dos colaboradores e desejam alinhar os talentos às metas estratégicas, promovendo uma gestão
+            mais eficaz e humanizada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKEDIN BUILDING -->
+  <section class="method bg-right">
+    <div class="container">
+      <div class="method-logo reveal">
+        <span class="lbl-linkedin">linkedin</span>&nbsp;<span class="lbl-building">building</span>
+      </div>
+      <div class="method-box reveal">
+        <div class="method-text">
+          <p>O <strong>Linkedin building</strong> é uma metodologia focada na análise estratégica do perfil e das
+            experiências profissionais de um talento. A partir desse diagnóstico, o currículo e o perfil no LinkedIn são
+            reestruturados de forma a destacar os atributos mais relevantes e valorizados pelo mercado, aumentando a
+            aderência e a atratividade do profissional para recrutadores e tomadores de decisão.</p>
+          <p>Mais do que um exercício de formatação, o <strong>Linkedin building</strong> é uma ferramenta de
+            reposicionamento e visibilidade, essencial para quem busca se destacar em um ambiente competitivo e
+            dinâmico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="investimento">
+    <div class="container">
+      <h2 class="section-title reveal">Investimento</h2>
+      <div class="pricing-grid">
+
+        <div class="price-card reveal" style="transition-delay:0.05s">
+          <div>
+            <span class="lbl-talent" style="font-size:1.3rem">talent</span><span class="lbl-scan"
+              style="font-size:1.3rem">Scan</span>
+          </div>
+          <div class="price-badge">1 avaliação</div>
+          <div class="price-item">
+            <span class="price-check">✓</span>
+            <div>
+              <strong>Talent Scan</strong>
+              <span>R$ 950</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="price-card reveal" style="transition-delay:0.15s">
+          <div>
+            <span class="lbl-linkedin" style="font-size:1.1rem">linkedin</span>&nbsp;<span class="lbl-building"
+              style="font-size:1.1rem">building</span>
+          </div>
+          <div class="price-badge">1 avaliação</div>
+          <div class="price-item">
+            <span class="price-check">✓</span>
+            <div>
+              <strong>Linkedin building</strong>
+              <span>R$ 600</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="price-card reveal" style="transition-delay:0.25s">
+          <div class="price-card-label">Recomendação</div>
+          <div class="price-badge">always on</div>
+          <div class="price-item">
+            <span class="price-check">✓</span>
+            <div>
+              <strong>Success fee</strong>
+              <span>50% do salário mensal</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="closing-bg">
+      <span class="closing-bg-text">obrigado</span>
+    </div>
+    <div class="closing-inner reveal">
+      <span class="closing-script">obrigado!</span>
+      <div class="closing-brand">
+        <span class="medium">guilherme</span>
+        <span class="big">Natorf</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP FLOATING -->
+  <!-- Substitua 5551999999999 pelo seu número: DDI+DDD+número, sem espaços -->
+  <a href="https://wa.me/5551991900679?text=Ol%C3%A1%2C+gostaria+de+saber+mais+sobre+o+outplacement!" class="wa-btn"
+    target="_blank" rel="noopener" aria-label="Fale pelo WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+    <span class="wa-label">Fale comigo</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
